@@ -1,0 +1,65 @@
+#====================
+#Server Configuration
+#====================
+server:
+  port: 1988
+---
+spring:
+  application:
+    name: student-service
+#========================
+#Datasource Configuration
+#========================
+---
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/students
+    username: owenz
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+---
+#===========================
+#Eureka Client Configuration
+#===========================
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    registry-fetch-interval-seconds: 10
+    instance-info-replication-interval-seconds: 30
+    healthcheck:
+      enabled: true
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+---
+management:
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+  endpoints:
+    web:
+      exposure:
+        include: health
+  tracing:
+    sampling:
+      probability: 1.0
+---
+spring:
+  cloud:
+    discovery:
+      enabled: true
+  output:
+    ansi:
+      enabled: always
+
+
+
+

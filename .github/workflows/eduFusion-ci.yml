@@ -1,0 +1,71 @@
+name: Microservices CI - Build Backend
+
+on:
+  pull_request:
+    branches:
+      - master
+      - staging
+      - development
+
+jobs:
+  build:
+    name: Build and Test eduFusion-Hub
+    runs-on: ubuntu-latest
+
+    services:
+      postgres-1:
+        image: postgres:15.4
+        env:
+          POSTGRES_USER: owenz
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: students_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      postgres-2:
+        image: postgres:15.4
+        env:
+          POSTGRES_USER: owenz
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: db2
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+
+      - name: Build and Test Student-Service
+        run: |
+          cd student-service
+          mvn clean install
+          mvn test
+
+      - name: Build and Test Microservice 2
+        run: |
+          cd backend/microservice-2
+          mvn clean install
+          mvn test
+
+      # Repeat the above steps for additional microservices
+
+      - name: Run Integration Tests
+        run: |
+          # Run integration tests across microservices if applicable
+
+      # Optionally, generate code coverage reports, artifacts, etc.

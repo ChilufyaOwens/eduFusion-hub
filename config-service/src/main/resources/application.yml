@@ -1,0 +1,32 @@
+server:
+  port: 1987
+---
+spring:
+  profiles:
+    active: native
+  application:
+    name: config-service
+---
+#====================
+#Server Configuration
+#====================
+spring:
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/configurations
+---
+#====================
+#Eureka Configuration
+#====================
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+    enabled: true

@@ -1,0 +1,71 @@
+#====================
+#Server Configuration
+#====================
+server:
+  port: 1989
+spring:
+  application:
+    name: gateway-service
+---
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%X{traceId:-},%X{spanId:-}] ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+spring:
+  output:
+    ansi:
+      enabled: always
+#===========================
+#Eureka Client Configuration
+#===========================
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+---
+#=====================
+#Gateway Configuration
+#=====================
+---
+management:
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+  endpoints:
+    web:
+      exposure:
+        include: health
+  tracing:
+    sampling:
+      probability: 1.0
+---
+#====================
+#Routes Configuration
+#====================
+spring:
+  cloud:
+    discovery:
+      locator:
+        enabled: true
+        lower-case-service-id: true
+    gateway:
+      routes:
+        - id: student-service
+          uri: lb://STUDENT-SERVICE
+          predicates:
+            - Path=/api/v1/students/**
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: studentCircuitBreaker
+#                fallbackUri: forward:/error-service
+#                statusCodes:
+#                  - 500
+#                  - "NOT_FOUND"
+#            - name: RequestRateLimiter
+#              args:
+#                redis-rate-limiter.replenishRate: 10
+#                redis-rate-limiter.burstCapacity: 20
+#                redis-rate-limiter.requestedTokens: 1
+
+
+

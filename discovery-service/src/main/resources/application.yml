@@ -1,0 +1,33 @@
+#===============================
+#Discovery Service Configuration
+#===============================
+
+server:
+  port: 8761
+---
+spring:
+  application:
+    name: discovery-service
+
+---
+#===========================
+#Eureka Server Configuration
+#===========================
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+
+spring:
+  cloud:
+    config:
+      enabled: false
+#spring:
+#  application:
+#    name: discovery-service
+#  config:
+#    import: optional:configserver:http://localhost:1987
