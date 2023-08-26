@@ -1,20 +1,16 @@
-#====================
-#Server Configuration
-#====================
+#=====================
+#Service Configuration
+#=====================
 server:
-  port: 1988
+  port: 1990
 ---
-spring:
-  application:
-    name: student-service
 #========================
 #Datasource Configuration
 #========================
----
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/students
+    url: jdbc:postgresql://localhost:5432/courses
     username: owenz
     password: password
   jpa:
@@ -40,6 +36,9 @@ eureka:
     lease-renewal-interval-in-seconds: 30
     lease-expiration-duration-in-seconds: 90
 ---
+#=====================
+#Tracing Configuration
+#=====================
 management:
   zipkin:
     tracing:
@@ -59,7 +58,3 @@ spring:
   output:
     ansi:
       enabled: always
-
-
-
-
