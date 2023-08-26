@@ -1,6 +1,6 @@
 package com.owens.edu.studentservice.dto;
 
-import com.owens.edu.studentservice.constants.Gender;
+import com.owens.edu.commons.constants.Gender;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 

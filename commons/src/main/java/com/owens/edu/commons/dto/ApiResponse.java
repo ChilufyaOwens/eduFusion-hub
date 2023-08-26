@@ -1,4 +1,4 @@
-package com.owens.edu.studentservice.dto;
+package com.owens.edu.commons.dto;
 
 import lombok.*;
 import org.springframework.http.HttpStatus;

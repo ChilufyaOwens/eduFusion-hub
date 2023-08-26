@@ -1,5 +1,6 @@
 package com.owens.edu.studentservice.entity;
 
+import com.owens.edu.commons.entity.Auditable;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import lombok.*;
 @ToString
 @Table(name = "tbl_address")
 @Entity
-public class Address extends Auditable<Long>{
+public class Address extends Auditable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

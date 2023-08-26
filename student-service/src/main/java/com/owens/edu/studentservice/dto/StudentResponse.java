@@ -1,7 +1,5 @@
 package com.owens.edu.studentservice.dto;
 
-import com.owens.edu.studentservice.constants.Gender;
-import com.owens.edu.studentservice.constants.Status;
 import com.owens.edu.studentservice.entity.Address;
 import com.owens.edu.studentservice.entity.EmergencyContact;
 import lombok.*;

@@ -1,4 +1,4 @@
-package com.owens.edu.studentservice.entity;
+package com.owens.edu.commons.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

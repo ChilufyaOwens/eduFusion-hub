@@ -1,5 +1,6 @@
 package com.owens.edu.studentservice.entity;
 
+import com.owens.edu.commons.entity.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -12,7 +13,7 @@ import lombok.*;
 @ToString
 @Table(name = "tbl_student_number")
 @Entity
-public class StudentNumber extends Auditable<Long>{
+public class StudentNumber extends Auditable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)

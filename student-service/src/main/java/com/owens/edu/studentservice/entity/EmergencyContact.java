@@ -1,6 +1,7 @@
 package com.owens.edu.studentservice.entity;
 
-import com.owens.edu.studentservice.constants.Gender;
+import com.owens.edu.commons.constants.Gender;
+import com.owens.edu.commons.entity.Auditable;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +13,7 @@ import lombok.*;
 @ToString
 @Table(name = "tbl_emergency_contact")
 @Entity
-public class EmergencyContact extends Auditable<Long>{
+public class EmergencyContact extends Auditable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

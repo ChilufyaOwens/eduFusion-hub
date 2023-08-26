@@ -1,6 +1,7 @@
 package com.owens.edu.studentservice.service.impl;
 
-import com.owens.edu.studentservice.constants.Status;
+import com.owens.edu.commons.constants.Status;
+import com.owens.edu.commons.exception.ResourceNotFoundException;
 import com.owens.edu.studentservice.controller.request.StudentRequest;
 import com.owens.edu.studentservice.controller.request.StudentUpdateRequest;
 import com.owens.edu.studentservice.dto.EmergencyContactDto;
@@ -12,7 +13,6 @@ import com.owens.edu.studentservice.dto.mappers.StudentResponseMapper;
 import com.owens.edu.studentservice.entity.EmergencyContact;
 import com.owens.edu.studentservice.entity.Student;
 import com.owens.edu.studentservice.exception.EmailAlreadyExistException;
-import com.owens.edu.studentservice.exception.ResourceNotFoundException;
 import com.owens.edu.studentservice.respository.StudentRepository;
 import com.owens.edu.studentservice.service.StudentNumberGenerator;
 import com.owens.edu.studentservice.service.StudentRegistrationService;

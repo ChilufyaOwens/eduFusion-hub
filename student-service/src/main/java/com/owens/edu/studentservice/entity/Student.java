@@ -1,7 +1,8 @@
 package com.owens.edu.studentservice.entity;
 
-import com.owens.edu.studentservice.constants.Gender;
-import com.owens.edu.studentservice.constants.Status;
+import com.owens.edu.commons.constants.Gender;
+import com.owens.edu.commons.constants.Status;
+import com.owens.edu.commons.entity.Auditable;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,7 +17,7 @@ import java.util.Set;
 @ToString
 @Table(name = "tbl_student")
 @Entity
-public class Student extends Auditable<Long>{
+public class Student extends Auditable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)

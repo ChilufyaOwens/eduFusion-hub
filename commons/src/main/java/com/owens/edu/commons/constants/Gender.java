@@ -1,4 +1,4 @@
-package com.owens.edu.studentservice.constants;
+package com.owens.edu.commons.constants;
 
 public enum Gender {
     MALE,

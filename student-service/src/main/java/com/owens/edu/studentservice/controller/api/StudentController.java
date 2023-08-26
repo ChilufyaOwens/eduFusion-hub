@@ -1,8 +1,8 @@
 package com.owens.edu.studentservice.controller.api;
 
+import com.owens.edu.commons.dto.ApiResponse;
 import com.owens.edu.studentservice.controller.request.StudentRequest;
 import com.owens.edu.studentservice.controller.request.StudentUpdateRequest;
-import com.owens.edu.studentservice.dto.ApiResponse;
 import com.owens.edu.studentservice.dto.StudentResponse;
 import com.owens.edu.studentservice.service.StudentService;
 import jakarta.validation.Valid;
