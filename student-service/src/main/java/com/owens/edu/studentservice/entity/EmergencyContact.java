@@ -1,6 +1,6 @@
 package com.owens.edu.studentservice.entity;
 
-import com.owens.edu.commons.constants.Gender;
+import com.owens.edu.studentservice.constants.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 

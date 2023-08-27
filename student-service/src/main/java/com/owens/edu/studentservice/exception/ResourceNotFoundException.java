@@ -1,4 +1,4 @@
-package com.owens.edu.commons.exception;
+package com.owens.edu.studentservice.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

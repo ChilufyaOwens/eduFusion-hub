@@ -1,4 +1,4 @@
-package com.owens.edu.commons.dto;
+package com.owens.edu.studentservice.dto;
 
 import lombok.*;
 

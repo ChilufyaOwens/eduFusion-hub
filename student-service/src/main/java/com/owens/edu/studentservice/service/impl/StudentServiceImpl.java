@@ -1,7 +1,7 @@
 package com.owens.edu.studentservice.service.impl;
 
-import com.owens.edu.commons.constants.Status;
-import com.owens.edu.commons.exception.ResourceNotFoundException;
+import com.owens.edu.studentservice.constants.Status;
+import com.owens.edu.studentservice.exception.ResourceNotFoundException;
 import com.owens.edu.studentservice.controller.request.StudentRequest;
 import com.owens.edu.studentservice.controller.request.StudentUpdateRequest;
 import com.owens.edu.studentservice.dto.EmergencyContactDto;

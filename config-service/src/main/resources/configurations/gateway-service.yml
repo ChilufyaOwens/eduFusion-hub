@@ -7,9 +7,6 @@ spring:
   application:
     name: gateway-service
 ---
-logging:
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} [%X{traceId:-},%X{spanId:-}] ${LOG_LEVEL_PATTERN:-%5p} %m%n"
 spring:
   output:
     ansi:

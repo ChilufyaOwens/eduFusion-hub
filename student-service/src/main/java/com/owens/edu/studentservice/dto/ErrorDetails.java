@@ -1,6 +1,7 @@
-package com.owens.edu.commons.dto;
+package com.owens.edu.studentservice.dto;
 
-import com.owens.edu.commons.constants.ApiError;
+
+import com.owens.edu.studentservice.constants.ApiError;
 import lombok.*;
 
 import java.time.LocalDateTime;

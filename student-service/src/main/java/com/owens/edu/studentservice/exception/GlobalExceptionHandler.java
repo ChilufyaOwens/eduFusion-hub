@@ -1,8 +1,7 @@
 package com.owens.edu.studentservice.exception;
 
-import com.owens.edu.commons.constants.ApiError;
-import com.owens.edu.commons.dto.ErrorDetails;
-import com.owens.edu.commons.exception.ResourceNotFoundException;
+import com.owens.edu.studentservice.constants.ApiError;
+import com.owens.edu.studentservice.dto.ErrorDetails;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

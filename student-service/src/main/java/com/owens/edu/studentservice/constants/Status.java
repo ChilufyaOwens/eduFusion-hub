@@ -1,4 +1,4 @@
-package com.owens.edu.commons.constants;
+package com.owens.edu.studentservice.constants;
 
 import lombok.Getter;
 
