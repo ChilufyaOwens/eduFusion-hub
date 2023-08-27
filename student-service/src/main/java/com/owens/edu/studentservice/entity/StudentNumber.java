@@ -1,6 +1,5 @@
 package com.owens.edu.studentservice.entity;
 
-import com.owens.edu.commons.entity.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -21,5 +20,5 @@ public class StudentNumber extends Auditable<Long> {
 
     @Size(max = 13, min = 13)
     @Column(nullable = false, unique = true)
-    private String studentNumber;
+    private String studentEnrolmentNumber;
 }

@@ -1,6 +1,5 @@
 package com.owens.edu.studentservice.entity;
 
-import com.owens.edu.commons.entity.Auditable;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -2,7 +2,6 @@ package com.owens.edu.studentservice.entity;
 
 import com.owens.edu.commons.constants.Gender;
 import com.owens.edu.commons.constants.Status;
-import com.owens.edu.commons.entity.Auditable;
 import jakarta.persistence.*;
 import lombok.*;
 

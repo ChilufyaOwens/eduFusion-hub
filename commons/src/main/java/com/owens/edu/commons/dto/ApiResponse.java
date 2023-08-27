@@ -1,7 +1,6 @@
 package com.owens.edu.commons.dto;
 
 import lombok.*;
-import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
@@ -11,6 +10,5 @@ import org.springframework.http.HttpStatus;
 public class ApiResponse {
     private boolean isSuccess;
     private String message;
-    private HttpStatus status;
     Object data;
 }
