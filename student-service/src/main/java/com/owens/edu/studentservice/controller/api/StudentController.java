@@ -1,8 +1,8 @@
 package com.owens.edu.studentservice.controller.api;
 
+import com.owens.edu.studentservice.dto.ApiResponse;
 import com.owens.edu.studentservice.controller.request.StudentRequest;
 import com.owens.edu.studentservice.controller.request.StudentUpdateRequest;
-import com.owens.edu.studentservice.dto.ApiResponse;
 import com.owens.edu.studentservice.dto.StudentResponse;
 import com.owens.edu.studentservice.service.StudentService;
 import jakarta.validation.Valid;
@@ -27,7 +27,6 @@ public class StudentController {
 
         return new ResponseEntity<>(ApiResponse.builder()
                 .isSuccess(true)
-                .status(HttpStatus.CREATED)
                 .message(String.format("Student successfully created with student number: %s",
                         savedStudent.getStudentNumber()))
                 .data(savedStudent)
@@ -39,14 +38,12 @@ public class StudentController {
         if(studentId == null){
             return new ResponseEntity<>(ApiResponse.builder()
                     .isSuccess(false)
-                    .status(HttpStatus.BAD_REQUEST)
                     .message("StudentId cannot be null or empty")
                     .build(), HttpStatus.BAD_REQUEST);
         }
         StudentResponse response = studentService.getStudentById(studentId);
         return new ResponseEntity<>(ApiResponse.builder()
                 .isSuccess(true)
-                .status(HttpStatus.OK)
                 .message(String.format("Student with studentId: %s", studentId))
                 .data(response)
                 .build(), HttpStatus.OK);
@@ -58,14 +55,12 @@ public class StudentController {
         if (StringUtils.isBlank(studentNumber)) {
             return new ResponseEntity<>(ApiResponse.builder()
                     .isSuccess(false)
-                    .status(HttpStatus.BAD_REQUEST)
                     .message("Student number cannot be null or empty")
                     .build(), HttpStatus.BAD_REQUEST);
         }
         StudentResponse studentByNumber = studentService.getStudentByNumber(studentNumber);
         return new ResponseEntity<>(ApiResponse.builder()
                 .isSuccess(true)
-                .status(HttpStatus.OK)
                 .message(String.format("Student with student number: %s", studentNumber))
                 .data(studentByNumber)
                 .build(), HttpStatus.OK);
@@ -77,14 +72,12 @@ public class StudentController {
         if(allStudents.isEmpty()){
             return new ResponseEntity<>(ApiResponse.builder()
                     .isSuccess(true)
-                    .status(HttpStatus.OK)
                     .message("No student registered")
                     .data(null)
                     .build(), HttpStatus.OK);
         }
         return new ResponseEntity<>(ApiResponse.builder()
                 .isSuccess(true)
-                .status(HttpStatus.OK)
                 .message("All Registered students")
                 .data(allStudents)
                 .build(), HttpStatus.OK);
@@ -96,7 +89,6 @@ public class StudentController {
         if(studentId == null){
             return new ResponseEntity<>(ApiResponse.builder()
                     .isSuccess(true)
-                    .status(HttpStatus.BAD_GATEWAY)
                     .message("StudentId cannot be null")
                     .data(null)
                     .build(), HttpStatus.BAD_REQUEST);
@@ -104,7 +96,6 @@ public class StudentController {
         StudentResponse response = studentService.updateStudentById(studentId, request);
         return new ResponseEntity<>(ApiResponse.builder()
                 .isSuccess(true)
-                .status(HttpStatus.OK)
                 .message(String.format("Student details with student number: %s updated.", response.getStudentNumber()))
                 .data(response)
                 .build(), HttpStatus.OK);
@@ -114,7 +105,6 @@ public class StudentController {
         if(studentId == null){
             return new ResponseEntity<>(ApiResponse.builder()
                     .isSuccess(true)
-                    .status(HttpStatus.BAD_GATEWAY)
                     .message("StudentId cannot be null")
                     .data(null)
                     .build(), HttpStatus.BAD_REQUEST);
@@ -122,7 +112,6 @@ public class StudentController {
         String deleteStudentById = studentService.deleteStudentById(studentId);
         return new ResponseEntity<>(ApiResponse.builder()
                 .isSuccess(true)
-                .status(HttpStatus.OK)
                 .message(String.format("Student with studentId %s deleted.", studentId))
                 .data(deleteStudentById)
                 .build(), HttpStatus.OK);

@@ -16,7 +16,7 @@ import java.util.Set;
 @ToString
 @Table(name = "tbl_student")
 @Entity
-public class Student extends Auditable<Long>{
+public class Student extends Auditable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)

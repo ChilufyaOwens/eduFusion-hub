@@ -12,7 +12,7 @@ import lombok.*;
 @ToString
 @Table(name = "tbl_student_number")
 @Entity
-public class StudentNumber extends Auditable<Long>{
+public class StudentNumber extends Auditable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
@@ -20,5 +20,5 @@ public class StudentNumber extends Auditable<Long>{
 
     @Size(max = 13, min = 13)
     @Column(nullable = false, unique = true)
-    private String studentNumber;
+    private String studentEnrolmentNumber;
 }

@@ -11,7 +11,7 @@ import lombok.*;
 @ToString
 @Table(name = "tbl_address")
 @Entity
-public class Address extends Auditable<Long>{
+public class Address extends Auditable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

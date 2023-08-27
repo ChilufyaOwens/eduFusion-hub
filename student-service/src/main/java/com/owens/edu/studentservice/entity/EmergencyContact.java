@@ -12,7 +12,7 @@ import lombok.*;
 @ToString
 @Table(name = "tbl_emergency_contact")
 @Entity
-public class EmergencyContact extends Auditable<Long>{
+public class EmergencyContact extends Auditable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

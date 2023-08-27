@@ -29,14 +29,14 @@ public class StudentNumberGeneratorImpl implements StudentNumberGenerator {
         do{
             //Generate unique student number
             studentNumber = StudentUtil.generateStudentNumber();
-        }while (studentNumberRepository.findStudentNumberByStudentNumber(studentNumber).isPresent());
+        }while (studentNumberRepository.findStudentNumberByStudentEnrolmentNumber(studentNumber).isPresent());
 
         //Save student number
         StudentNumber saveStudentNumber = studentNumberRepository.save(
                 StudentNumber.builder()
-                        .studentNumber(studentNumber)
+                        .studentEnrolmentNumber(studentNumber)
                         .build());
-        log.info("Student number:  {} generated.", saveStudentNumber.getStudentNumber());
-        return saveStudentNumber.getStudentNumber();
+        log.info("Student number:  {} generated.", saveStudentNumber.getStudentEnrolmentNumber());
+        return saveStudentNumber.getStudentEnrolmentNumber();
     }
 }
