@@ -2,7 +2,7 @@ package com.owens.edu.programservice.controller;
 
 import com.owens.edu.programservice.controller.request.CreateProgramRequest;
 import com.owens.edu.programservice.dto.ApiResponse;
-import com.owens.edu.programservice.dto.CreateProgramResponse;
+import com.owens.edu.programservice.dto.ProgramResponse;
 import com.owens.edu.programservice.service.ProgramService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class ProgramController {
 
     @PostMapping
     public ResponseEntity<ApiResponse> createProgram(@Valid @RequestBody CreateProgramRequest request){
-        CreateProgramResponse program = programService.createProgram(request);
+        ProgramResponse program = programService.createProgram(request);
         return new ResponseEntity<>(ApiResponse.builder()
                 .isSuccess(true)
                 .message("")

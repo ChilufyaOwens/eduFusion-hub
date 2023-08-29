@@ -8,4 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LearningOutcomeDto {
+    private Long programId;
+    private String name;
+    private String description;
 }

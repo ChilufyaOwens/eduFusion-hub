@@ -3,17 +3,17 @@ package com.owens.edu.programservice.service;
 import com.owens.edu.programservice.controller.request.CreateProgramRequest;
 import com.owens.edu.programservice.controller.request.UpdateProgramRequest;
 import com.owens.edu.programservice.dto.Course;
-import com.owens.edu.programservice.dto.CreateProgramResponse;
+import com.owens.edu.programservice.dto.ProgramResponse;
 
 import java.util.List;
 
 public interface ProgramService {
-    CreateProgramResponse createProgram(CreateProgramRequest request);
-    CreateProgramResponse getProgramById(Long programId);
-    List<CreateProgramResponse> getPrograms();
+    ProgramResponse createProgram(CreateProgramRequest request);
+    ProgramResponse getProgramById(Long programId);
+    List<ProgramResponse> getPrograms();
     List<Course> getCoursesByProgramId(Long programId);
 
-    CreateProgramResponse updateProgram(Long programId, UpdateProgramRequest request);
+    ProgramResponse updateProgram(Long programId, UpdateProgramRequest request);
     String deleteProgramById(Long programId);
 
 }

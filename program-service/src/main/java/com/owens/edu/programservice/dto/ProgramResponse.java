@@ -1,15 +1,10 @@
-package com.owens.edu.programservice.controller.request;
-
-import lombok.*;
+package com.owens.edu.programservice.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class UpdateProgramRequest {
+public class ProgramResponse {
+    private Long id;
     private String name;
     private String description;
     private LocalDate startDate;
@@ -19,4 +14,5 @@ public class UpdateProgramRequest {
     private String departmentId;
     private String departmentName;
     private String degreeType;
+    private LocalDateTime createdAt;
 }
