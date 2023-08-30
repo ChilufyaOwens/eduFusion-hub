@@ -19,11 +19,13 @@ public class CurriculumItem extends ProgramJpaAudit<Long> {
     private String name;
     private String description;
     private String moduleCode;
+    @Column(name = "item_order")
     private Integer order; // The order in which the item appears in the curriculum
     private Long courseId;
     private String courseName;
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "curriculum_id", referencedColumnName = "id")
+    @ToString.Exclude
     private Curriculum curriculum;
 
 }

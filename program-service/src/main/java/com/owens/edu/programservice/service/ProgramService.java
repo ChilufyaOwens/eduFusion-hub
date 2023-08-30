@@ -2,7 +2,6 @@ package com.owens.edu.programservice.service;
 
 import com.owens.edu.programservice.controller.request.CreateProgramRequest;
 import com.owens.edu.programservice.controller.request.UpdateProgramRequest;
-import com.owens.edu.programservice.dto.Course;
 import com.owens.edu.programservice.dto.ProgramResponse;
 
 import java.util.List;

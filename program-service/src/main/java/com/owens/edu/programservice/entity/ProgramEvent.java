@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "program_event")
+@Table(name = "tbl_program_event")
 public class ProgramEvent extends ProgramJpaAudit<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

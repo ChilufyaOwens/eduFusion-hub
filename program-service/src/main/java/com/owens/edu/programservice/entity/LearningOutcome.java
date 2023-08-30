@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "learning_outcome")
+@Table(name = "tbl_learning_outcome")
 public class LearningOutcome extends ProgramJpaAudit<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

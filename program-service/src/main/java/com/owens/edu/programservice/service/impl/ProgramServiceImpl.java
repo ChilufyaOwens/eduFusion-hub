@@ -4,7 +4,6 @@ import com.owens.edu.programservice.constants.DegreeType;
 import com.owens.edu.programservice.constants.Status;
 import com.owens.edu.programservice.controller.request.CreateProgramRequest;
 import com.owens.edu.programservice.controller.request.UpdateProgramRequest;
-import com.owens.edu.programservice.dto.Course;
 import com.owens.edu.programservice.dto.ProgramResponse;
 import com.owens.edu.programservice.dto.mapper.ProgramResponseMapper;
 import com.owens.edu.programservice.entity.Program;
@@ -17,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
