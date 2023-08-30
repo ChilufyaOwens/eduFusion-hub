@@ -50,19 +50,10 @@ spring:
           uri: lb://STUDENT-SERVICE
           predicates:
             - Path=/api/v1/students/**
-#          filters:
-#            - name: CircuitBreaker
-#              args:
-#                name: studentCircuitBreaker
-#                fallbackUri: forward:/error-service
-#                statusCodes:
-#                  - 500
-#                  - "NOT_FOUND"
-#            - name: RequestRateLimiter
-#              args:
-#                redis-rate-limiter.replenishRate: 10
-#                redis-rate-limiter.burstCapacity: 20
-#                redis-rate-limiter.requestedTokens: 1
+        - id: program-service
+          uri: lb://PROGRAM-SERVICE
+          predicates:
+            - Path=/api/v1/programs/**
 
 
 

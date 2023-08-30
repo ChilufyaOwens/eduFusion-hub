@@ -101,7 +101,8 @@ public class StudentController {
                 .build(), HttpStatus.OK);
     }
 
-    public ResponseEntity<ApiResponse> deleteStudentId(@PathVariable(name = "id") Long studentId){
+    @DeleteMapping(name = "DeleteStudentById")
+    public ResponseEntity<ApiResponse> deleteStudentById(@PathVariable(name = "id") Long studentId){
         if(studentId == null){
             return new ResponseEntity<>(ApiResponse.builder()
                     .isSuccess(true)

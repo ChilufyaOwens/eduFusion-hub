@@ -1,0 +1,16 @@
+#=====================
+#Service Configuration
+#=====================
+spring:
+  application:
+    name: program-service
+  config:
+    import: optional:configserver:http://localhost:1987
+
+
+
+
+
+
+
+
