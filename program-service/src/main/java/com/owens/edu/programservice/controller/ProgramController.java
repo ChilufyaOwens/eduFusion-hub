@@ -20,6 +20,11 @@ public class ProgramController {
 
     private final ProgramService programService;
 
+    /**
+     * createProgram method creates a new education program that students will enroll in
+     * @param request request to create a program
+     * @return created program response
+     */
     @PostMapping(name = "CreateProgram")
     public ResponseEntity<ApiResponse> createProgram(@Valid @RequestBody CreateProgramRequest request){
         ProgramResponse program = programService.createProgram(request);
