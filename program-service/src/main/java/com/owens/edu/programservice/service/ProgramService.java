@@ -11,9 +11,8 @@ public interface ProgramService {
     ProgramResponse createProgram(CreateProgramRequest request);
     ProgramResponse getProgramById(Long programId);
     List<ProgramResponse> getPrograms();
-    List<Course> getCoursesByProgramId(Long programId);
-
     ProgramResponse updateProgram(Long programId, UpdateProgramRequest request);
     String deleteProgramById(Long programId);
+    String discontinueProgram(Long programId);
 
 }

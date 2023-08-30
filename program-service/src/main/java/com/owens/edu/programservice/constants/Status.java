@@ -7,6 +7,7 @@ public enum Status {
     ACTIVE("Active"),
     INACTIVE("Inactive"),
     APPROVED("Approved"),
+    SUBMITTED("Submitted"),
     PENDING_APPROVAL("Pending Approval"),
     PAID("Paid"),
     PENDING_PAYMENT("Pending Payment"),

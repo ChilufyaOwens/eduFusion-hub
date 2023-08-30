@@ -1,6 +1,7 @@
 package com.owens.edu.programservice.entity;
 
 import com.owens.edu.programservice.constants.DegreeType;
+import com.owens.edu.programservice.constants.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,6 +31,8 @@ public class Program extends ProgramJpaAudit<Long>{
     private String departmentName;
     @Enumerated(EnumType.STRING)
     private DegreeType degreeType;
+    @Enumerated(EnumType.STRING)
+    private Status status;
     @OneToMany(mappedBy = "program", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private Set<LearningOutcome> learningOutcome;

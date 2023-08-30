@@ -10,8 +10,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateProgramRequest {
-    private String name;
-    private String description;
     private LocalDate startDate;
     private LocalDate endDate;
     private Long coordinatorId;
