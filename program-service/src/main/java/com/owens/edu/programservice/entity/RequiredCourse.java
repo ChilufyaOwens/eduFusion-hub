@@ -20,7 +20,7 @@ public class RequiredCourse extends ProgramJpaAudit<Long> {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "admission_requirements_id", referencedColumnName = "id")
     @ToString.Exclude
-    private AdmissionRequirements admissionRequirements;
+    private AdmissionRequirement admissionRequirement;
 
     private String name;
     private String description;

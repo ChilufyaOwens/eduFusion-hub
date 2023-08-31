@@ -14,7 +14,7 @@ import java.util.Set;
 @ToString
 @Table(name = "tbl_admission_requirements")
 @Entity
-public class AdmissionRequirements extends ProgramJpaAudit<Long>{
+public class AdmissionRequirement extends ProgramJpaAudit<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +26,7 @@ public class AdmissionRequirements extends ProgramJpaAudit<Long>{
     @Enumerated(EnumType.STRING)
     private RequirementType requirementType;
     private Integer minimumCredits;
-    @OneToMany(mappedBy = "admissionRequirements", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "admissionRequirement", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private Set<RequiredCourse> requiredCourses;
 

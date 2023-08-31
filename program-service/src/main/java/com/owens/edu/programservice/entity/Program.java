@@ -38,7 +38,7 @@ public class Program extends ProgramJpaAudit<Long>{
     private Set<LearningOutcome> learningOutcome;
     @OneToMany(mappedBy = "program", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @ToString.Exclude
-    private Set<AdmissionRequirements> admissionRequirements;
+    private Set<AdmissionRequirement> admissionRequirements;
 
     @OneToMany(mappedBy = "program", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @ToString.Exclude

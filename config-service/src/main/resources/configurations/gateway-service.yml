@@ -54,6 +54,8 @@ spring:
           uri: lb://PROGRAM-SERVICE
           predicates:
             - Path=/api/v1/programs/**
+            - Path=/api/v1/admissions/requirement
+
 
 
 
