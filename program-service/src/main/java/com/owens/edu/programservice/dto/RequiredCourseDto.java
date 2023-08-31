@@ -11,5 +11,4 @@ public class RequiredCourseDto {
     private String name;
     private String description;
     private  Integer minimumCredits;
-    private Long admissionRequiredId;
 }

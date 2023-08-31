@@ -1,9 +1,9 @@
 package com.owens.edu.programservice.dto;
 
 import com.owens.edu.programservice.constants.RequirementType;
-import com.owens.edu.programservice.entity.RequiredCourse;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Getter
@@ -11,10 +11,11 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AdmissionRequirementsDto {
+public class AdmissionRequirementResponse {
     private Long programId;
     private String requirementDescription;
     private RequirementType requirementType;
     private Integer minimumCredits;
-    private Set<RequiredCourse> requiredCourses;
+    private Set<RequiredCourseDto> requiredCourses;
+    private LocalDateTime createdAt;
 }
