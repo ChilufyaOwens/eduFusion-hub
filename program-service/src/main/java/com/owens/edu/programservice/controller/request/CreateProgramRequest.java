@@ -1,6 +1,5 @@
 package com.owens.edu.programservice.controller.request;
 
-import com.owens.edu.programservice.constants.DegreeType;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
