@@ -11,6 +11,6 @@ public interface ProgramEventService {
     ProgramEventResponse getProgramEventById(Long eventId);
     List<ProgramEventResponse> getAllEvents();
     ProgramEventResponse updateProgramEventById(Long eventId, ProgramEventRequest request);
-    ProgramEventResponse disableProgramEventById(Long eventId);
+    ProgramEventResponse cancelProgramEventById(Long eventId);
     String deleteProgramEventById(Long eventId);
 }
