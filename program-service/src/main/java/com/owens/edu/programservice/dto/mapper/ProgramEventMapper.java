@@ -1,15 +1,15 @@
 package com.owens.edu.programservice.dto.mapper;
 
-import com.owens.edu.programservice.dto.ProgramEventDto;
+import com.owens.edu.programservice.controller.request.ProgramEventRequest;
 import com.owens.edu.programservice.entity.ProgramEvent;
 import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ProgramEventMapper {
-    ProgramEvent toEntity(ProgramEventDto programEventDto);
+    ProgramEvent toEntity(ProgramEventRequest programEventRequest);
 
-    ProgramEventDto toDto(ProgramEvent programEvent);
+    ProgramEventRequest toDto(ProgramEvent programEvent);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    ProgramEvent partialUpdate(ProgramEventDto programEventDto, @MappingTarget ProgramEvent programEvent);
+    ProgramEvent partialUpdate(ProgramEventRequest programEventRequest, @MappingTarget ProgramEvent programEvent);
 }
