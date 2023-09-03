@@ -9,8 +9,12 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProgramEventDto {
+public class ProgramEventResponse {
     private String name;
-    private Long programId;
+    private String description;
     private LocalDate eventDate;
+    private LocalDate eventEndDate;
+    private String status;
+    private Long programId;
+    private LocalDate createdAt;
 }

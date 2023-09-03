@@ -1,5 +1,6 @@
 package com.owens.edu.programservice.entity;
 
+import com.owens.edu.programservice.constants.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,12 +21,16 @@ public class ProgramEvent extends ProgramJpaAudit<Long> {
     private Long id;
 
     private String name;
+    private String description;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    private LocalDate eventDate;
+    private LocalDate eventEndDate;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "program_id", referencedColumnName = "id")
     @ToString.Exclude
     private Program program;
-
-    private LocalDate eventDate;
-
 }
