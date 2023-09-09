@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EnrollmentDto {
+public class EnrollmentResponse {
     private Long studentId;
     private Long programId;
     private LocalDate enrollmentDate;

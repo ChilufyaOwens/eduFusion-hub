@@ -1,7 +1,6 @@
 package com.owens.edu.programservice.controller.request;
 
-import com.owens.edu.programservice.dto.ModuleDto;
-import jakarta.validation.constraints.NotBlank;
+import com.owens.edu.programservice.dto.CourseDto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -13,13 +12,11 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CurriculumRequest {
-    @NotBlank
-    private String name;
-    private String description;
+public class CourseRequest {
     @NotNull
-    private Long programId;
-    @NotNull
+    private Long moduleId;
     @NotEmpty
-    private Set<ModuleDto> modules;
+    private Set<CourseDto> courses;
+
+
 }

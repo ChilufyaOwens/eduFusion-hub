@@ -1,25 +1,27 @@
 package com.owens.edu.programservice.controller.request;
 
-import com.owens.edu.programservice.dto.ModuleDto;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-
-import java.util.Set;
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CurriculumRequest {
+public class ModuleRequest {
     @NotBlank
     private String name;
     private String description;
+    private String moduleCode;
+    @NotBlank
+    private String startDate;
+    @NotBlank
+    private String endDate;
+    private Boolean isComplete;
+    private Integer failedCourseCount;
     @NotNull
-    private Long programId;
+    private Integer order;
     @NotNull
-    @NotEmpty
-    private Set<ModuleDto> modules;
+    private Long curriculumId;
 }

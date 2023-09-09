@@ -18,12 +18,23 @@ public class Curriculum extends ProgramJpaAudit<Long>{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
     private Long id;
+    private String name;
+    private String description;
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "program_id", referencedColumnName = "id")
     @ToString.Exclude
     private Program program;
-    private String description;
     @OneToMany(mappedBy = "curriculum", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
-    private Set<CurriculumItem> curriculumItems;
+    private Set<Module> modules;
+
+    public Curriculum(
+            String name,
+            String description,
+            Program program
+    ){
+        this.name = name;
+        this.description = description;
+        this.program = program;
+    }
 }

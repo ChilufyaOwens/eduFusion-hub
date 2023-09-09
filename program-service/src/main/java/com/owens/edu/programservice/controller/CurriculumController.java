@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/v1/curriculums")
+@RequestMapping(value = "api/v1/curricula")
 @RequiredArgsConstructor
 public class CurriculumController {
 

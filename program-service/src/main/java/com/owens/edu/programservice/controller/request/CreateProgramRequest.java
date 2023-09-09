@@ -3,8 +3,6 @@ package com.owens.edu.programservice.controller.request;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @Builder
@@ -15,9 +13,9 @@ public class CreateProgramRequest {
     private String name;
     private String description;
     @NotBlank
-    private LocalDate startDate;
+    private String startDate;
     @NotBlank
-    private LocalDate endDate;
+    private String endDate;
     private Long coordinatorId;
     private String coordinatorName;
     private String departmentId;

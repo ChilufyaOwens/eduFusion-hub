@@ -1,7 +1,7 @@
 package com.owens.edu.programservice.repository;
 
-import com.owens.edu.programservice.entity.RequiredCourse;
+import com.owens.edu.programservice.entity.PrerequisiteCourse;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RequiredCourseRepository extends JpaRepository<RequiredCourse, Long> {
+public interface RequiredCourseRepository extends JpaRepository<PrerequisiteCourse, Long> {
 }

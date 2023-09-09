@@ -1,6 +1,6 @@
 package com.owens.edu.programservice.controller.request;
 
-import com.owens.edu.programservice.dto.RequiredCourseDto;
+import com.owens.edu.programservice.dto.PrerequisiteCourseDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -23,6 +23,7 @@ public class AdmissionRequirementRequest {
     @NotNull
     private Integer minimumCredits;
     @NotEmpty
-    private Set<RequiredCourseDto> requiredCourses;
+    private Set<PrerequisiteCourseDto> prerequisiteCourses;
+
 
 }
