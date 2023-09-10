@@ -14,6 +14,7 @@ public class CourseDto {
     private Long courseId;
     @NotNull
     private String courseName;
+    private String courseCode;
     private String description;
     @NotNull
     private String duration;

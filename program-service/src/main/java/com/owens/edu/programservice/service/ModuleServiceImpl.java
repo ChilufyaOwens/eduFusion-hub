@@ -1,5 +1,6 @@
 package com.owens.edu.programservice.service;
 
+import com.owens.edu.programservice.constants.Status;
 import com.owens.edu.programservice.controller.request.CourseRequest;
 import com.owens.edu.programservice.controller.request.ModuleRequest;
 import com.owens.edu.programservice.dto.CourseResponse;
@@ -61,6 +62,7 @@ public final class ModuleServiceImpl implements ModuleService {
                     log.info("Adding curriculum module for curriculum with id: {}", curriculum.getId());
                     Module module = mapper.toEntity(request);
                     module.setCurriculum(curriculum);
+                    module.setStatus(Status.UPCOMING);
                     Module addedModule = moduleRepository.save(module);
                     log.info("Curriculum module for curriculum with id: {}, added", addedModule.getCurriculum().getId());
                     return responseMapper.toDto(addedModule);

@@ -18,6 +18,7 @@ public class Course extends ProgramJpaAudit<Long>{
     private Long id;
     private Long courseId;
     private String courseName;
+    private String courseCode;
     private String description;
     private String duration;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)

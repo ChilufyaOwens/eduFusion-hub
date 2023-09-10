@@ -2,7 +2,6 @@ package com.owens.edu.programservice.controller.request;
 
 import com.owens.edu.programservice.dto.ModuleDto;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -19,7 +18,5 @@ public class CurriculumRequest {
     private String description;
     @NotNull
     private Long programId;
-    @NotNull
-    @NotEmpty
     private Set<ModuleDto> modules;
 }

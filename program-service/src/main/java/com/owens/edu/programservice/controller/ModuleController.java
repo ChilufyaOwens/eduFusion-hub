@@ -35,7 +35,7 @@ public class ModuleController {
 
     }
 
-    @PostMapping(name = "AddModuleCourses")
+    @PostMapping(value="course", name = "AddModuleCourses")
     public ResponseEntity<ApiResponse> addModuleCourses(@Valid @RequestBody CourseRequest request){
 
         Set<CourseResponse> courseResponseList = moduleService.addModuleCourses(request);

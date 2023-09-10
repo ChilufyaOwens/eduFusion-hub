@@ -60,7 +60,7 @@ public class CurriculumServiceImpl implements CurriculumService {
         log.info("Curriculum with id: {} saved for {} program", savedCurriculum.getId(), program.getName());
 
         //Check if there are modules
-        if(!request.getModules().isEmpty()){
+        if (request.getModules() != null) {
             Curriculum curriculumMapperEntity = curriculumMapper.toEntity(request);
             Set<Module> modules = moduleService.saveModules(curriculumMapperEntity.getModules(), savedCurriculum);
             savedCurriculum.setModules(modules);
@@ -115,7 +115,7 @@ public class CurriculumServiceImpl implements CurriculumService {
                         String.format("Curriculum with Id: '%s' not found.", curriculumId)
                 ));
 
-        if(!(Objects.equals(curriculum.getProgram().getId(), updateRequest.getProgramId()))){
+        if (!(Objects.equals(curriculum.getProgram().getId(), updateRequest.getProgramId()))) {
             Program program = programRepository.findById(updateRequest.getProgramId())
                     .orElseThrow(() -> new ProgramNotFoundException(
                             String.format("Program with Id: '%s' not found.", updateRequest.getProgramId())
