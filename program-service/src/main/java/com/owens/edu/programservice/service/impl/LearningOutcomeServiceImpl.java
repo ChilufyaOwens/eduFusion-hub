@@ -11,6 +11,7 @@ import com.owens.edu.programservice.exception.ProgramNotFoundException;
 import com.owens.edu.programservice.repository.LearningOutcomeRepository;
 import com.owens.edu.programservice.repository.ProgramRepository;
 import com.owens.edu.programservice.service.LearningOutcomeService;
+import com.owens.edu.programservice.utils.AppMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class LearningOutcomeServiceImpl implements LearningOutcomeService {
         //Check if program exists
         Program program = programRepository.findById(request.getProgramId())
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Program with id: '%s' not found.", request.getProgramId())
+                        String.format(AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, request.getProgramId())
                 ));
 
         //Check if the name is unique
@@ -64,14 +65,14 @@ public class LearningOutcomeServiceImpl implements LearningOutcomeService {
 
         //Check if the program exists
         Program program = programRepository.findById(programId).orElseThrow(() -> new ProgramNotFoundException(
-                String.format("Program with id: '%s' not found", programId)
+                String.format(AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, programId)
         ));
 
         //Get learning outcome
         LearningOutcome learningOutcome = learningOutcomeRepository
                 .findLearningOutcomeByProgram(program)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Learning outcome by program with id: '%s' not found.", program.getId())));
+                        String.format(AppMessage.LEARNING_OUTCOME_BY_PROGRAM_NOT_FOUND_ERROR_MESSAGE, program.getId())));
 
         LearningOutcomeResponse outcomeResponse = learningOutcomeResponseMapper.toDto(learningOutcome);
         outcomeResponse.setProgramId(programId);
@@ -86,7 +87,7 @@ public class LearningOutcomeServiceImpl implements LearningOutcomeService {
 
         LearningOutcome learningOutcome = learningOutcomeRepository.findById(learningOutcomeId)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Learning outcome with Id: '%s' not found.", learningOutcomeId)));
+                        String.format(AppMessage.LEARNING_OUTCOME_NOT_FOUND_ERROR_MESSAGE, learningOutcomeId)));
 
         LearningOutcomeResponse outcomeResponse = learningOutcomeResponseMapper.toDto(learningOutcome);
         outcomeResponse.setProgramId(learningOutcome.getProgram().getId());
@@ -121,7 +122,7 @@ public class LearningOutcomeServiceImpl implements LearningOutcomeService {
         //Check if the learning outcome exists
         LearningOutcome learningOutcome = learningOutcomeRepository.findById(learningOutcomeId)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Program's learning outcome with id: '%s' not found.", learningOutcomeId)
+                        String.format(AppMessage.LEARNING_OUTCOME_NOT_FOUND_ERROR_MESSAGE, learningOutcomeId)
                 ));
 
         learningOutcome.setName(request.getName());
@@ -132,7 +133,7 @@ public class LearningOutcomeServiceImpl implements LearningOutcomeService {
             //Check if the program exists
             Program program = programRepository.findById(request.getProgramId())
                     .orElseThrow(() -> new ProgramNotFoundException(
-                            String.format("LearningOutcome's program with Id: '%s' not found.", request.getProgramId())
+                            String.format(AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, request.getProgramId())
                     ));
             learningOutcome.setProgram(program);
         }
@@ -155,7 +156,7 @@ public class LearningOutcomeServiceImpl implements LearningOutcomeService {
         //Check if the learning outcome exists
         LearningOutcome learningOutcome = learningOutcomeRepository.findById(learningOutcomeId)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Program's learning outcome with Id: '%s' not found", learningOutcomeId)
+                        String.format(AppMessage.LEARNING_OUTCOME_NOT_FOUND_ERROR_MESSAGE, learningOutcomeId)
                 ));
 
         learningOutcomeRepository.delete(learningOutcome);

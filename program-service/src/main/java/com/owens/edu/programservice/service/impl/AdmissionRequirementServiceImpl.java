@@ -13,6 +13,7 @@ import com.owens.edu.programservice.exception.ProgramNotFoundException;
 import com.owens.edu.programservice.repository.AdmissionRequirementRepository;
 import com.owens.edu.programservice.repository.ProgramRepository;
 import com.owens.edu.programservice.service.AdmissionRequirementService;
+import com.owens.edu.programservice.utils.AppMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class AdmissionRequirementServiceImpl implements AdmissionRequirementServ
         //Check if program exists
         Program program = programRepository.findById(request.getProgramId())
                 .orElseThrow(() -> new ProgramNotFoundException(String.
-                format("Program with Id: %s not found", request.getProgramId())));
+                format(AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, request.getProgramId())));
 
         AdmissionRequirement admissionRequirement = admissionRequirementMapper.toEntity(request);
         admissionRequirement.setProgram(program);
@@ -56,7 +57,7 @@ public class AdmissionRequirementServiceImpl implements AdmissionRequirementServ
         log.info("Fetching all program's admissions requirement with programId: {}", programId);
         //Check if program exists
         Program program = programRepository.findById(programId).orElseThrow(() -> new ProgramNotFoundException(
-                String.format("Program with Id: %s not found", programId)
+                String.format(AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, programId)
         ));
 
         List<AdmissionRequirement> admissionRequirementsByProgram = admissionRequirementRepository
@@ -82,7 +83,7 @@ public class AdmissionRequirementServiceImpl implements AdmissionRequirementServ
         //Check if admissionRequirement exists
         AdmissionRequirement admissionRequirement = admissionRequirementRepository.findById(admissionRequirementsId)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Admission requirement with Id: '%s' not found", admissionRequirementsId)
+                        String.format(AppMessage.ADMISSION_REQUIREMENT_NOT_FOUND_ERROR_MESSAGE, admissionRequirementsId)
                 ));
 
         log.info("Fetched admission requirement with id: {}", admissionRequirementsId);
@@ -111,7 +112,7 @@ public class AdmissionRequirementServiceImpl implements AdmissionRequirementServ
         //Check if admissionRequirement exists
         AdmissionRequirement admissionRequirement = admissionRequirementRepository.findById(admissionRequirementId)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("AdmissionRequirement with Id: '%s' not found", admissionRequirementId)
+                        String.format(AppMessage.ADMISSION_REQUIREMENT_NOT_FOUND_ERROR_MESSAGE, admissionRequirementId)
                 ));
 
         AdmissionRequirement updatedAdmissionRequirement = admissionRequirementRepository.save(
@@ -153,7 +154,7 @@ public class AdmissionRequirementServiceImpl implements AdmissionRequirementServ
         //Check if admissionRequirement exists
         AdmissionRequirement admissionRequirement = admissionRequirementRepository.findById(admissionRequirementId)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("AdmissionRequirement with Id: '%s' not found.", admissionRequirementId)
+                        String.format(AppMessage.ADMISSION_REQUIREMENT_NOT_FOUND_ERROR_MESSAGE, admissionRequirementId)
                 ));
 
         //Delete admissionRequirement

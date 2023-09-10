@@ -1,5 +1,6 @@
 package com.owens.edu.programservice.service;
 
+import com.owens.edu.programservice.utils.AppMessage;
 import com.owens.edu.programservice.constants.Status;
 import com.owens.edu.programservice.controller.request.CourseRequest;
 import com.owens.edu.programservice.controller.request.ModuleRequest;
@@ -68,7 +69,7 @@ public final class ModuleServiceImpl implements ModuleService {
                     return responseMapper.toDto(addedModule);
                 })
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Curriculum with id: '%s' not found", request.getCurriculumId())
+                        String.format(AppMessage.CURRICULUM_NOT_FOUND_ERROR_MESSAGE, request.getCurriculumId())
                 ));
     }
 
@@ -79,21 +80,21 @@ public final class ModuleServiceImpl implements ModuleService {
         //Check if module exists
         Module module = moduleRepository.findById(request.getModuleId())
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Module with id: '%s' not found", request.getModuleId())
+                        String.format(AppMessage.MODULE_NOT_FOUND_ERROR_MESSAGE, request.getModuleId())
                 ));
 
-
-        //peek: I've used peek to log a message for each course added.
-        // This allows for logging without interfering with the stream.
-        return request.getCourses().stream()
-                .map(course -> {
-                    Course courseEntity = courseMapper.toEntity(course);
+        Set<CourseResponse> responses = request.getCourses().stream()
+                .map(courseDto -> {
+                    Course courseEntity = courseMapper.toEntity(courseDto);
                     courseEntity.setModule(module);
                     return courseRepository.save(courseEntity);
                 })
-                .peek(course -> log.info("Added all module courses"))
                 .map(courseResponseMapper::toDto)
                 .collect(Collectors.toSet());
+
+        log.info("Added all module courses");
+
+        return responses;
     }
 
     /**
@@ -112,7 +113,7 @@ public final class ModuleServiceImpl implements ModuleService {
                     return responseMapper.toDto(module);
                 })
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Module with id: '%s' not found", moduleId)
+                        String.format(AppMessage.MODULE_NOT_FOUND_ERROR_MESSAGE, moduleId)
                 ));
     }
 
@@ -133,7 +134,7 @@ public final class ModuleServiceImpl implements ModuleService {
                     return String.format("Curriculum module with id: '%s' deleted successfully", moduleId);
                 })
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Module with id: '%s' not found", moduleId)
+                        String.format(AppMessage.MODULE_NOT_FOUND_ERROR_MESSAGE, moduleId)
                 ));
     }
 
@@ -147,7 +148,7 @@ public final class ModuleServiceImpl implements ModuleService {
                     log.info("Module course with id: {} deleted", courseId);
                     return String.format("Module course with id: '%s' deleted successfully", courseId);
                 }).orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Module course with id: '%s' not found", courseId)
+                        String.format(AppMessage.MODULE_NOT_FOUND_ERROR_MESSAGE, courseId)
                 ));
     }
 }
