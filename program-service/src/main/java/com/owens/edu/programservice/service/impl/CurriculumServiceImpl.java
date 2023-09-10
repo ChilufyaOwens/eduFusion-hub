@@ -14,6 +14,7 @@ import com.owens.edu.programservice.repository.CurriculumRepository;
 import com.owens.edu.programservice.repository.ProgramRepository;
 import com.owens.edu.programservice.service.CurriculumService;
 import com.owens.edu.programservice.service.ModuleService;
+import com.owens.edu.programservice.utils.AppMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -41,12 +42,12 @@ public class CurriculumServiceImpl implements CurriculumService {
 
         Program program = programRepository.findById(request.getProgramId())
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Program with Id: '%s' not found", request.getProgramId())));
+                        String.format(AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, request.getProgramId())));
 
         curriculumRepository.findCurriculumByProgram(program)
                 .ifPresent(curriculum -> {
                     throw new ProgramAlreadyExistException(
-                            String.format("Curriculum already exists for program with name: '%s'", program.getName()));
+                            String.format(AppMessage.CURRICULUM_ALREADY_EXISTS_ERROR_MESSAGE, program.getName()));
                 });
 
         Curriculum curriculum = new Curriculum(
@@ -75,11 +76,12 @@ public class CurriculumServiceImpl implements CurriculumService {
         //Check if program exists
         Program program = programRepository.findById(programId)
                 .orElseThrow(() -> new ProgramNotFoundException(String.format(
-                        "Program with Id: '%s' not found", programId
+                        AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, programId
                 )));
 
         Curriculum curriculum = curriculumRepository.findCurriculumByProgram(program)
-                .orElseThrow(() -> new ProgramNotFoundException("Curriculum for '%s' program not found"));
+                .orElseThrow(() -> new ProgramNotFoundException(
+                        String.format(AppMessage.CURRICULUM_BY_PROGRAM_NOT_FOUND_ERROR_MESSAGE, program.getName())));
         log.info("Fetched program curriculum for program with Id: {}", program);
         return curriculumResponseMapper.toDto(curriculum);
     }
@@ -89,7 +91,8 @@ public class CurriculumServiceImpl implements CurriculumService {
         log.info("Fetching program curriculum with Id: {}", curriculumId);
 
         Curriculum curriculum = curriculumRepository.findById(curriculumId)
-                .orElseThrow(() -> new ProgramNotFoundException("Curriculum with Id: '%s' not found"));
+                .orElseThrow(() -> new ProgramNotFoundException(
+                        String.format(AppMessage.CURRICULUM_NOT_FOUND_ERROR_MESSAGE, curriculumId)));
 
         log.info("Fetched curriculum with Id: {}", curriculum.getId());
         return curriculumResponseMapper.toDto(curriculum);
@@ -112,13 +115,13 @@ public class CurriculumServiceImpl implements CurriculumService {
         //Check if curriculum is present
         Curriculum curriculum = curriculumRepository.findById(curriculumId)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Curriculum with Id: '%s' not found.", curriculumId)
+                        String.format(AppMessage.CURRICULUM_NOT_FOUND_ERROR_MESSAGE, curriculumId)
                 ));
 
         if (!(Objects.equals(curriculum.getProgram().getId(), updateRequest.getProgramId()))) {
             Program program = programRepository.findById(updateRequest.getProgramId())
                     .orElseThrow(() -> new ProgramNotFoundException(
-                            String.format("Program with Id: '%s' not found.", updateRequest.getProgramId())
+                            String.format(AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, updateRequest.getProgramId())
                     ));
             curriculum.setProgram(program);
         }
@@ -159,7 +162,7 @@ public class CurriculumServiceImpl implements CurriculumService {
         //Check if the curriculum exists
         Curriculum curriculum = curriculumRepository.findById(curriculumId)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Curriculum with curriculumId: '%s', not found.", curriculumId)
+                        String.format(AppMessage.CURRICULUM_NOT_FOUND_ERROR_MESSAGE, curriculumId)
                 ));
 
         curriculumRepository.delete(curriculum);

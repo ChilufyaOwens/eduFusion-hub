@@ -11,13 +11,13 @@ import com.owens.edu.programservice.exception.ProgramNotFoundException;
 import com.owens.edu.programservice.repository.ProgramEventRepository;
 import com.owens.edu.programservice.repository.ProgramRepository;
 import com.owens.edu.programservice.service.ProgramEventService;
+import com.owens.edu.programservice.utils.AppMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +36,7 @@ public class ProgramEventServiceImpl implements ProgramEventService {
         //Check if program exists
         Program program = programRepository.findById(request.getProgramId())
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Program with Id: '%s' not found.", request.getProgramId())
+                        String.format(AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, request.getProgramId())
                 ));
 
         ProgramEvent programEvent = programEventMapper.toEntity(request);
@@ -61,12 +61,12 @@ public class ProgramEventServiceImpl implements ProgramEventService {
         //Check if program exists
         Program program = programRepository.findById(programId)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Program with Id: '%s' not found.", programId)
+                        String.format(AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, programId)
                 ));
 
         ProgramEvent programEvent = programEventRepository.findProgramEventByProgram(program)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("ProgramEvent with programId: '%s' not found.", program.getId())));
+                        String.format(AppMessage.PROGRAM_EVENT_BY_PROGRAM_NOT_FOUND_ERROR_MESSAGE, program.getId())));
 
         ProgramEventResponse programEventResponse = programEventResponseMapper.toDto(programEvent);
         programEventResponse.setProgramId(programId);
@@ -82,7 +82,7 @@ public class ProgramEventServiceImpl implements ProgramEventService {
 
         ProgramEvent programEvent = programEventRepository.findById(eventId)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("ProgramEvent with Id: '%s' not found.", eventId)
+                        String.format(AppMessage.PROGRAM_EVENT_NOT_FOUND_ERROR_MESSAGE, eventId)
                 ));
 
         ProgramEventResponse programEventResponse = programEventResponseMapper.toDto(programEvent);
@@ -117,7 +117,7 @@ public class ProgramEventServiceImpl implements ProgramEventService {
 
         ProgramEvent existingProgramEvent = programEventRepository.findById(eventId)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("ProgramEvent with Id: '%s' not found", eventId)
+                        String.format(AppMessage.PROGRAM_EVENT_NOT_FOUND_ERROR_MESSAGE, eventId)
                 ));
 
         existingProgramEvent.setEventDate(LocalDate.parse(request.getEventDate()));
@@ -129,7 +129,7 @@ public class ProgramEventServiceImpl implements ProgramEventService {
                 existingProgramEvent::setProgram,
                 () -> {
                     throw new ProgramNotFoundException(
-                            String.format("Program with Id: '%s' not found", request.getProgramId())
+                            String.format(AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, request.getProgramId())
                     );
                 }
         );
@@ -152,7 +152,7 @@ public class ProgramEventServiceImpl implements ProgramEventService {
         //Check if the event exists
         ProgramEvent programEvent = programEventRepository.findById(eventId)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Program event with Id: '%s' not found.", eventId)
+                        String.format(AppMessage.PROGRAM_EVENT_NOT_FOUND_ERROR_MESSAGE, eventId)
                 ));
 
         programEvent.setStatus(Status.CANCELLED);
@@ -173,7 +173,7 @@ public class ProgramEventServiceImpl implements ProgramEventService {
         //Check if program event exists
         ProgramEvent programEvent = programEventRepository.findById(eventId)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Program event with Id: '%s' not found.", eventId)
+                        String.format(AppMessage.PROGRAM_EVENT_NOT_FOUND_ERROR_MESSAGE, eventId)
                 ));
         programEventRepository.delete(programEvent);
 

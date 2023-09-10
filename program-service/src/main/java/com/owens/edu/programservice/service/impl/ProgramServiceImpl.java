@@ -1,5 +1,6 @@
 package com.owens.edu.programservice.service.impl;
 
+import com.owens.edu.programservice.utils.AppMessage;
 import com.owens.edu.programservice.constants.DegreeType;
 import com.owens.edu.programservice.constants.Status;
 import com.owens.edu.programservice.controller.request.CreateProgramRequest;
@@ -33,8 +34,10 @@ public class ProgramServiceImpl implements ProgramService {
         programRepository.
                 findProgramByNameAndStatus(request.getName(), Status.ACTIVE)
                 .ifPresent(program -> {
-                    throw new ProgramAlreadyExistException(String.format("Program with name %s and degree " +
-                            "type %s already exists.", request.getName(), request.getDegreeType()));
+                    throw new ProgramAlreadyExistException(
+                            String.format(AppMessage.PROGRAM_ALREADY_EXISTS_ERROR_MESSAGE,
+                                    request.getName(),
+                                    request.getDegreeType()));
                 });
 
         Program savedProgram = programRepository.save(
@@ -67,7 +70,7 @@ public class ProgramServiceImpl implements ProgramService {
         //Check if program exists
         Program program = programRepository.findById(programId)
                 .orElseThrow(() -> new ProgramNotFoundException(String
-                        .format("Program with Id: %s not found", programId)));
+                        .format(AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, programId)));
         log.info("Fetched program with id: {}, and name: {}", programId, program.getName());
         return programResponseMapper.toDto(program);
     }
@@ -95,7 +98,7 @@ public class ProgramServiceImpl implements ProgramService {
         //Check if program with programId exists
         Program existingProgram = programRepository.findById(programId)
                 .orElseThrow(() -> new ProgramNotFoundException(String
-                        .format("Program with programId: %s not found", programId)));
+                        .format(AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, programId)));
 
         Program updatedProgram = programRepository.save(
                 updatedProgramDetails(request, existingProgram)
@@ -127,7 +130,7 @@ public class ProgramServiceImpl implements ProgramService {
         log.info("Deleting program with id: {}", programId);
         Program program = programRepository.findById(programId)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Program with Id: '%s' not found.", programId)
+                        String.format(AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, programId)
                 ));
         //Delete this program.
         programRepository.delete(program);
@@ -146,7 +149,7 @@ public class ProgramServiceImpl implements ProgramService {
         log.info("Discontinue program with Id: {}", programId);
         Program program = programRepository.findById(programId)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Program with Id: %s not found", programId)
+                        String.format(AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, programId)
                 ));
         program.setStatus(Status.INACTIVE);
         programRepository.save(program);
