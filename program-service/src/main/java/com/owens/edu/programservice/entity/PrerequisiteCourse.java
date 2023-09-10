@@ -10,8 +10,8 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "tbl_required_course")
-public class RequiredCourse extends ProgramJpaAudit<Long> {
+@Table(name = "tbl_prerequisite_courses")
+public class PrerequisiteCourse extends ProgramJpaAudit<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

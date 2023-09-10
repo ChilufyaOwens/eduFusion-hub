@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -49,8 +50,8 @@ public class ProgramServiceImpl implements ProgramService {
         return Program.builder()
                 .name(request.getName())
                 .description(request.getDescription())
-                .startDate(request.getStartDate())
-                .endDate(request.getEndDate())
+                .startDate(LocalDate.parse(request.getStartDate()))
+                .endDate(LocalDate.parse(request.getEndDate()))
                 .coordinatorId(request.getCoordinatorId())
                 .coordinatorName(request.getCoordinatorName())
                 .departmentId(request.getDepartmentId())
@@ -126,7 +127,7 @@ public class ProgramServiceImpl implements ProgramService {
         log.info("Deleting program with id: {}", programId);
         Program program = programRepository.findById(programId)
                 .orElseThrow(() -> new ProgramNotFoundException(
-                        String.format("Program with Id: {} not found.", programId)
+                        String.format("Program with Id: '%s' not found.", programId)
                 ));
         //Delete this program.
         programRepository.delete(program);

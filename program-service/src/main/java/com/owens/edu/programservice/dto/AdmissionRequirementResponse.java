@@ -16,6 +16,6 @@ public class AdmissionRequirementResponse {
     private String requirementDescription;
     private RequirementType requirementType;
     private Integer minimumCredits;
-    private Set<RequiredCourseDto> requiredCourses;
+    private Set<PrerequisiteCourseDto> requiredCourses;
     private LocalDateTime createdAt;
 }

@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RequiredCourseDto {
+public class PrerequisiteCourseDto {
     private String name;
     private String description;
     private  Integer minimumCredits;

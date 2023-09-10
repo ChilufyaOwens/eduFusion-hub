@@ -10,7 +10,7 @@ public interface AdmissionRequirementResponseMapper {
 
     @AfterMapping
     default void linkRequiredCourses(@MappingTarget AdmissionRequirement admissionRequirement) {
-        admissionRequirement.getRequiredCourses().forEach(requiredCours -> requiredCours.setAdmissionRequirement(admissionRequirement));
+        admissionRequirement.getPrerequisiteCours().forEach(requiredCours -> requiredCours.setAdmissionRequirement(admissionRequirement));
     }
 
     AdmissionRequirementResponse toDto(AdmissionRequirement admissionRequirement);

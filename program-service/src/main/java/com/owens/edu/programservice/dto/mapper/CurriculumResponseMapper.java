@@ -9,8 +9,8 @@ public interface CurriculumResponseMapper {
     Curriculum toEntity(CurriculumResponse curriculumResponse);
 
     @AfterMapping
-    default void linkCurriculumItems(@MappingTarget Curriculum curriculum) {
-        curriculum.getCurriculumItems().forEach(curriculumItem -> curriculumItem.setCurriculum(curriculum));
+    default void linkModules(@MappingTarget Curriculum curriculum) {
+        curriculum.getModules().forEach(module -> module.setCurriculum(curriculum));
     }
 
     CurriculumResponse toDto(Curriculum curriculum);

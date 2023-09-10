@@ -55,7 +55,7 @@ spring:
           predicates:
             - Path=/api/v1/programs/**
             - Path=/api/v1/admissions/requirement
-            - Path=/api/v1/curriculums
+            - Path=/api/v1/curriculums/**
             - Path=/api/v1/program/learning-outcome
             - Path=/api/v1/program/events
 

@@ -5,10 +5,10 @@ import com.owens.edu.programservice.controller.request.AdmissionRequirementReque
 import com.owens.edu.programservice.dto.AdmissionRequirementResponse;
 import com.owens.edu.programservice.dto.mapper.AdmissionRequirementMapper;
 import com.owens.edu.programservice.dto.mapper.AdmissionRequirementResponseMapper;
-import com.owens.edu.programservice.dto.mapper.RequiredCourseMapper;
+import com.owens.edu.programservice.dto.mapper.PrerequisiteCourseMapper;
 import com.owens.edu.programservice.entity.AdmissionRequirement;
+import com.owens.edu.programservice.entity.PrerequisiteCourse;
 import com.owens.edu.programservice.entity.Program;
-import com.owens.edu.programservice.entity.RequiredCourse;
 import com.owens.edu.programservice.exception.ProgramNotFoundException;
 import com.owens.edu.programservice.repository.AdmissionRequirementRepository;
 import com.owens.edu.programservice.repository.ProgramRepository;
@@ -31,7 +31,7 @@ public class AdmissionRequirementServiceImpl implements AdmissionRequirementServ
     private final AdmissionRequirementMapper admissionRequirementMapper;
     private final AdmissionRequirementResponseMapper admissionRequirementResponseMapper;
     private final ProgramRepository programRepository;
-    private final RequiredCourseMapper requiredCourseMapper;
+    private final PrerequisiteCourseMapper prerequisiteCourseMapper;
 
     @Override
     public AdmissionRequirementResponse createProgramAdmissionRequirement(AdmissionRequirementRequest request) {
@@ -132,11 +132,11 @@ public class AdmissionRequirementServiceImpl implements AdmissionRequirementServ
         admissionRequirement.setMinimumCredits(updateRequest.getMinimumCredits());
         admissionRequirement.setRequirementDescription(updateRequest.getRequirementDescription());
 
-        Set<RequiredCourse> courses = updateRequest.getRequiredCourses().stream()
-                .map(requiredCourseMapper::toEntity)
+        Set<PrerequisiteCourse> courses = updateRequest.getPrerequisiteCourses().stream()
+                .map(prerequisiteCourseMapper::toEntity)
                 .collect(Collectors.toSet());
 
-        admissionRequirement.setRequiredCourses(courses);
+        admissionRequirement.setPrerequisiteCours(courses);
 
         Optional<Program> optionalProgram = programRepository.findById(updateRequest.getProgramId());
         if(optionalProgram.isPresent() && (admissionRequirement.getProgram() != optionalProgram.get())){

@@ -24,7 +24,10 @@ public enum Status {
     PARTIAL_PAYMENT("Partial Payment"),
     PAYMENT_FAILED("Payment Failed"),
     PAYMENT_CANCELLED("Payment Cancelled"),
-    CANCELLED("Cancelled");
+    CANCELLED("Cancelled"),
+    UPCOMING("Upcoming"),
+    SCHEDULED("Scheduled"),
+    COMPLETED("Completed");
 
     private final String displayName;
 

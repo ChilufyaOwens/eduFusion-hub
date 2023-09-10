@@ -1,18 +1,19 @@
 package com.owens.edu.programservice.service.impl;
 
 import com.owens.edu.programservice.controller.request.CurriculumRequest;
-import com.owens.edu.programservice.dto.CurriculumItemDto;
 import com.owens.edu.programservice.dto.CurriculumResponse;
+import com.owens.edu.programservice.dto.ModuleDto;
 import com.owens.edu.programservice.dto.mapper.CurriculumMapper;
 import com.owens.edu.programservice.dto.mapper.CurriculumResponseMapper;
 import com.owens.edu.programservice.entity.Curriculum;
-import com.owens.edu.programservice.entity.CurriculumItem;
+import com.owens.edu.programservice.entity.Module;
 import com.owens.edu.programservice.entity.Program;
 import com.owens.edu.programservice.exception.ProgramAlreadyExistException;
 import com.owens.edu.programservice.exception.ProgramNotFoundException;
 import com.owens.edu.programservice.repository.CurriculumRepository;
 import com.owens.edu.programservice.repository.ProgramRepository;
 import com.owens.edu.programservice.service.CurriculumService;
+import com.owens.edu.programservice.service.ModuleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,7 @@ public class CurriculumServiceImpl implements CurriculumService {
     private final CurriculumMapper curriculumMapper;
     private final CurriculumResponseMapper curriculumResponseMapper;
     private final ProgramRepository programRepository;
+    private final ModuleService moduleService;
 
     @Override
     public CurriculumResponse createProgramCurriculum(CurriculumRequest request) {
@@ -47,12 +49,22 @@ public class CurriculumServiceImpl implements CurriculumService {
                             String.format("Curriculum already exists for program with name: '%s'", program.getName()));
                 });
 
-        Curriculum curriculum = curriculumMapper.toEntity(request);
-        curriculum.setProgram(program);
+        Curriculum curriculum = new Curriculum(
+                request.getName(),
+                request.getDescription(),
+                program
+        );
 
         Curriculum savedCurriculum = curriculumRepository.save(curriculum);
 
         log.info("Curriculum with id: {} saved for {} program", savedCurriculum.getId(), program.getName());
+
+        //Check if there are modules
+        if (request.getModules() != null) {
+            Curriculum curriculumMapperEntity = curriculumMapper.toEntity(request);
+            Set<Module> modules = moduleService.saveModules(curriculumMapperEntity.getModules(), savedCurriculum);
+            savedCurriculum.setModules(modules);
+        }
         return curriculumResponseMapper.toDto(savedCurriculum);
     }
 
@@ -103,7 +115,7 @@ public class CurriculumServiceImpl implements CurriculumService {
                         String.format("Curriculum with Id: '%s' not found.", curriculumId)
                 ));
 
-        if(!(Objects.equals(curriculum.getProgram().getId(), updateRequest.getProgramId()))){
+        if (!(Objects.equals(curriculum.getProgram().getId(), updateRequest.getProgramId()))) {
             Program program = programRepository.findById(updateRequest.getProgramId())
                     .orElseThrow(() -> new ProgramNotFoundException(
                             String.format("Program with Id: '%s' not found.", updateRequest.getProgramId())
@@ -112,28 +124,26 @@ public class CurriculumServiceImpl implements CurriculumService {
         }
 
         curriculum.setDescription(updateRequest.getDescription());
-        Set<CurriculumItem> curriculumItems = curriculum.getCurriculumItems()
+        Set<Module> modules = curriculum.getModules()
                 .stream()
-                .map(item -> {
+                .map(module -> {
                     // Find the corresponding update request item by name (if it exists)
-                    Optional<CurriculumItemDto> matchingUpdateItem = updateRequest.getCurriculumItems()
+                    Optional<ModuleDto> matchingUpdateItem = updateRequest.getModules()
                             .stream()
-                            .filter(updateItem -> updateItem.getName().equals(item.getName()))
+                            .filter(updateItem -> updateItem.getName().equals(module.getName()))
                             .findFirst();
 
                     // If a matching update request item exists, update the curriculum item
-                    matchingUpdateItem.ifPresent(updateItem -> {
-                        item.setCourseId(updateItem.getCourseId());
-                        item.setCourseName(updateItem.getCourseName());
-                        item.setDescription(updateItem.getDescription());
-                        item.setOrder(updateItem.getOrder());
-                        item.setModuleCode(updateItem.getModuleCode());
+                    matchingUpdateItem.ifPresent(updateModule -> {
+                        module.setDescription(updateModule.getDescription());
+                        module.setOrder(updateModule.getOrder());
+                        module.setModuleCode(updateModule.getModuleCode());
                     });
 
-                    return item;
+                    return module;
                 })
                 .collect(Collectors.toSet());
-        curriculum.setCurriculumItems(curriculumItems);
+        curriculum.setModules(modules);
 
         Curriculum updatedCurriculum = curriculumRepository.save(curriculum);
 
