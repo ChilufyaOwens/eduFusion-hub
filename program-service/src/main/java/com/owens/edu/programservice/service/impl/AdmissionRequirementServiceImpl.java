@@ -3,6 +3,7 @@ package com.owens.edu.programservice.service.impl;
 import com.owens.edu.programservice.constants.RequirementType;
 import com.owens.edu.programservice.controller.request.AdmissionRequirementRequest;
 import com.owens.edu.programservice.dto.AdmissionRequirementResponse;
+import com.owens.edu.programservice.dto.PrerequisiteCourseDto;
 import com.owens.edu.programservice.dto.mapper.AdmissionRequirementMapper;
 import com.owens.edu.programservice.dto.mapper.AdmissionRequirementResponseMapper;
 import com.owens.edu.programservice.dto.mapper.PrerequisiteCourseMapper;
@@ -13,6 +14,7 @@ import com.owens.edu.programservice.exception.ProgramNotFoundException;
 import com.owens.edu.programservice.repository.AdmissionRequirementRepository;
 import com.owens.edu.programservice.repository.ProgramRepository;
 import com.owens.edu.programservice.service.AdmissionRequirementService;
+import com.owens.edu.programservice.service.PrerequisiteCourseService;
 import com.owens.edu.programservice.utils.AppMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,23 +35,41 @@ public class AdmissionRequirementServiceImpl implements AdmissionRequirementServ
     private final AdmissionRequirementResponseMapper admissionRequirementResponseMapper;
     private final ProgramRepository programRepository;
     private final PrerequisiteCourseMapper prerequisiteCourseMapper;
+    private final PrerequisiteCourseService prerequisiteCourseService;
 
     @Override
     public AdmissionRequirementResponse createProgramAdmissionRequirement(AdmissionRequirementRequest request) {
-        log.info("Creating program's admissions requirement with programId: {}", request.getProgramId());
-        //Check if program exists
-        Program program = programRepository.findById(request.getProgramId())
-                .orElseThrow(() -> new ProgramNotFoundException(String.
-                format(AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, request.getProgramId())));
+        Long programId = request.getProgramId();
+        log.info("Creating program's admissions requirement with programId: {}", programId);
+
+        Program program = programRepository.findById(programId)
+                .orElseThrow(() -> new ProgramNotFoundException(String.format(AppMessage.PROGRAM_NOT_FOUND_ERROR_MESSAGE, programId)));
 
         AdmissionRequirement admissionRequirement = admissionRequirementMapper.toEntity(request);
         admissionRequirement.setProgram(program);
 
-        AdmissionRequirement savedAdmissionRequirement = admissionRequirementRepository.save(admissionRequirement);
+        AdmissionRequirement savedAdmissionRequirement = admissionRequirementRepository.save(
+                new AdmissionRequirement(
+                        admissionRequirement.getProgram(),
+                        admissionRequirement.getRequirementDescription(),
+                        admissionRequirement.getMinimumCredits(),
+                        admissionRequirement.getRequirementType()
+                )
+        );
+
+        //Save prerequisite courses for admission requirements
+        Set<PrerequisiteCourseDto> prerequisiteCourses = prerequisiteCourseService.savePrerequisiteCourses(
+                admissionRequirement.getPrerequisiteCourses(), savedAdmissionRequirement);
 
         log.info("Program admission requirement created with Id: {}", savedAdmissionRequirement.getId());
-        return admissionRequirementResponseMapper.toDto(savedAdmissionRequirement);
+
+        AdmissionRequirementResponse requirementResponse = admissionRequirementResponseMapper.toDto(savedAdmissionRequirement);
+        requirementResponse.setProgramId(program.getId());
+        requirementResponse.setRequiredCourses(prerequisiteCourses);
+
+        return requirementResponse;
     }
+
 
     @Override
     public List<AdmissionRequirementResponse> getProgramAdmissionRequirementsById(Long programId) {
@@ -137,7 +157,7 @@ public class AdmissionRequirementServiceImpl implements AdmissionRequirementServ
                 .map(prerequisiteCourseMapper::toEntity)
                 .collect(Collectors.toSet());
 
-        admissionRequirement.setPrerequisiteCours(courses);
+        admissionRequirement.setPrerequisiteCourses(courses);
 
         Optional<Program> optionalProgram = programRepository.findById(updateRequest.getProgramId());
         if(optionalProgram.isPresent() && (admissionRequirement.getProgram() != optionalProgram.get())){
