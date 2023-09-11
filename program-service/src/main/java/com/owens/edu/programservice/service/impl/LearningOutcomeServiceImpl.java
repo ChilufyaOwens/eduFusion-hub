@@ -45,7 +45,7 @@ public class LearningOutcomeServiceImpl implements LearningOutcomeService {
         learningOutcomeRepository.findLearningOutcomeByName(request.getName())
                 .ifPresent(learningOutcome -> {
                     throw new ProgramAlreadyExistException(String.format(
-                            "Program learning outcome with name: '%s' already exists", request.getName()));
+                            AppMessage.LEARNING_OUTCOME_ALREADY_EXISTS_ERROR_MESSAGE, request.getName()));
                 });
 
         LearningOutcome learningOutcome = learningOutcomeMapper.toEntity(request);
@@ -55,7 +55,9 @@ public class LearningOutcomeServiceImpl implements LearningOutcomeService {
 
         log.info("Learning outcome save for program with id: {} and name: {}", program.getId(), program.getName());
 
-        return learningOutcomeResponseMapper.toDto(savedLearningOutcome);
+        LearningOutcomeResponse outcomeResponse = learningOutcomeResponseMapper.toDto(savedLearningOutcome);
+        outcomeResponse.setProgramId(program.getId());
+        return outcomeResponse;
     }
 
     @Override

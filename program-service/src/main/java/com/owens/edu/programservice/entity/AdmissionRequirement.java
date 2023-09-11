@@ -28,6 +28,17 @@ public class AdmissionRequirement extends ProgramJpaAudit<Long>{
     private Integer minimumCredits;
     @OneToMany(mappedBy = "admissionRequirement", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
-    private Set<PrerequisiteCourse> prerequisiteCours;
+    private Set<PrerequisiteCourse> prerequisiteCourses;
 
+    public AdmissionRequirement(Program program,
+                                String requirementDescription,
+                                Integer minimumCredits,
+                                RequirementType requirementType
+                                ){
+        this.program = program;
+        this.requirementDescription = requirementDescription;
+        this.minimumCredits = minimumCredits;
+        this.requirementType = requirementType;
+
+    }
 }

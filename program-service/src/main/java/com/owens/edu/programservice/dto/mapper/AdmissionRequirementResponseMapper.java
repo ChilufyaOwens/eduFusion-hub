@@ -8,11 +8,6 @@ import org.mapstruct.*;
 public interface AdmissionRequirementResponseMapper {
     AdmissionRequirement toEntity(AdmissionRequirementResponse admissionRequirementResponse);
 
-    @AfterMapping
-    default void linkRequiredCourses(@MappingTarget AdmissionRequirement admissionRequirement) {
-        admissionRequirement.getPrerequisiteCours().forEach(requiredCours -> requiredCours.setAdmissionRequirement(admissionRequirement));
-    }
-
     AdmissionRequirementResponse toDto(AdmissionRequirement admissionRequirement);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

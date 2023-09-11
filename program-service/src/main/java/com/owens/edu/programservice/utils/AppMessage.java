@@ -9,6 +9,7 @@ public class AppMessage {
     public static final String ADMISSION_REQUIREMENT_NOT_FOUND_ERROR_MESSAGE = "Admission requirement with Id: '%s' not found";
     public static final String LEARNING_OUTCOME_NOT_FOUND_ERROR_MESSAGE = "Learning outcome with Id: '%s' not found";
     public static final String LEARNING_OUTCOME_BY_PROGRAM_NOT_FOUND_ERROR_MESSAGE = "Learning outcome by program with id: '%s' not found";
+    public static final String LEARNING_OUTCOME_ALREADY_EXISTS_ERROR_MESSAGE = "Learning outcome with name: '%s' already exists";
     public static final String PROGRAM_EVENT_NOT_FOUND_ERROR_MESSAGE = "ProgramEvent with Id: '%s' not found";
     public static final String PROGRAM_EVENT_BY_PROGRAM_NOT_FOUND_ERROR_MESSAGE = "ProgramEvent with programId: '%s' not found";
     public static final String CURRICULUM_BY_PROGRAM_NOT_FOUND_ERROR_MESSAGE = "Curriculum for '%s' program not found";

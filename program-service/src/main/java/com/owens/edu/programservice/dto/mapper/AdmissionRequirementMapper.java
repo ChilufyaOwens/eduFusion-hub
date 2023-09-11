@@ -9,8 +9,8 @@ public interface AdmissionRequirementMapper {
     AdmissionRequirement toEntity(AdmissionRequirementRequest admissionRequirementRequest);
 
     @AfterMapping
-    default void linkRequiredCourses(@MappingTarget AdmissionRequirement admissionRequirement) {
-        admissionRequirement.getPrerequisiteCours().forEach(requiredCours -> requiredCours.setAdmissionRequirement(admissionRequirement));
+    default void linkPrerequisiteCourses(@MappingTarget AdmissionRequirement admissionRequirement) {
+        admissionRequirement.getPrerequisiteCourses().forEach(prerequisiteCourse -> prerequisiteCourse.setAdmissionRequirement(admissionRequirement));
     }
 
     AdmissionRequirementRequest toDto(AdmissionRequirement admissionRequirement);
